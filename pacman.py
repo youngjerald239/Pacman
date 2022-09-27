@@ -32,7 +32,10 @@ class Pacman(pygame.sprite.Sprite):
     def move(self,speed):
         if self.direction.magnitude() != 0:
             self.direction = self.direction.normalize()
-        
+            
+        self.rect.x += self.direction.x * speed 
+        self.collision('horizontal')
+        self.rect.y += self.direction.y * speed
         #self.rect.center += self.direction * speed 
 
     def collision(self,direction):
