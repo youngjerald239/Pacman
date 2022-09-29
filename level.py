@@ -1,6 +1,6 @@
 import pygame
 from settings import *
-from tile import Tile
+from tile import Pellet, Tile
 from pacman import Pacman
 from debug import debug
 
@@ -24,10 +24,18 @@ class Level:
                     Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
                 if col == 'p':
                     self.pacman = Pacman((x,y),[self.visible_sprites],self.obstacle_sprites)
+                if col == 'c':
+                    Pellet((x,y),[self.visible_sprites])
 
     def run(self):
         #update and draw the game
         self.visible_sprites.draw(self.display_surface)
         self.visible_sprites.update()
         debug(self.pacman.direction)
-        
+
+
+class YSortCameraGroup(pygame.sprite.Group):
+    def __init__(self):
+
+        # general setup  
+        super().__init__()     
