@@ -1,8 +1,9 @@
 import pygame
 from settings import *
-from tile import Pellet, Tile
+from tile import Pellet, Tile, Teleport
 from pacman import Pacman
 from debug import debug
+
 
 class Level:
     def __init__(self):
@@ -11,7 +12,7 @@ class Level:
         # sprite group setup
         self.visible_sprites = pygame.sprite.Group()
         self.obstacle_sprites = pygame.sprite.Group()
-
+        self.teleport_sprites = pygame.sprite.Group()
         # sprite setup
         self.create_map()
 
@@ -26,16 +27,13 @@ class Level:
                     self.pacman = Pacman((x,y),[self.visible_sprites],self.obstacle_sprites)
                 if col == 'c':
                     Pellet((x,y),[self.visible_sprites])
+                if col == 'a':
+                    Teleport((x,y),[self.visible_sprites])
+                if col == 'b':
+                    Teleport((x,y),[self.visible_sprites])
 
     def run(self):
         #update and draw the game
         self.visible_sprites.draw(self.display_surface)
         self.visible_sprites.update()
-        debug(self.pacman.direction)
-
-
-class YSortCameraGroup(pygame.sprite.Group):
-    def __init__(self):
-
-        # general setup  
-        super().__init__()     
+        debug(self.pacman.direction)       
